@@ -1,63 +1,51 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.5.0"
-    id("io.spring.dependency-management") version "1.1.7"
-    kotlin("plugin.jpa") version "1.9.25"
+    kotlin("jvm")
+    kotlin("plugin.jpa")
+    kotlin("plugin.spring")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
 }
 
-group = "ru.bacha"
+group = "ru.bacha.registration"
+val revision: String by project
 version = "0.0.1-SNAPSHOT"
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
 
 repositories {
     mavenCentral()
 }
 
+val springBootStarterVersion: String by project
+val junitVersion: String by project
+val flywayGPVersion: String by project
+val lombokVersion: String by project
+
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation(project(":api"))
+
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootStarterVersion")
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootStarterVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.kafka:spring-kafka")
-    compileOnly("org.projectlombok:lombok")
+
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+
     runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("org.flywaydb:flyway-gradle-plugin:11.12.0")
-    annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    runtimeOnly("org.flywaydb:flyway-gradle-plugin:$flywayGPVersion")
+
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootStarterVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.kafka:spring-kafka-test")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.4")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.13.4")
-}
-
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
-    }
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
 sourceSets.main {
     java.srcDirs("src/main/kotlin/ru/bacha/registration")
-}
-
-allOpen {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.MappedSuperclass")
-    annotation("jakarta.persistence.Embeddable")
 }
 
 tasks.withType<Test> {

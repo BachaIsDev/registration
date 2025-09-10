@@ -1,5 +1,26 @@
 components:
   schemas:
+    AppointmentTypeDto:
+      type: string
+      enum:
+        - TEST
+        - DISEASE
+        - INSPECTION
     Appointment:
       type: object
-      
+      properties:
+        appointmentDate:
+          type: string
+          format: date-time
+          nullable: false
+          description: Дата записи
+        doctorId:
+          type: string
+          format: uuid
+          nullable: false
+          description: Идентификатор доктора
+        appointmentType:
+          $ref: "#/components/schemas/AppointmentTypeDto"
+        additionalInfo:
+          type: string
+          description: Дополнительная информация от клиента
