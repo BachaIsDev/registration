@@ -16,4 +16,5 @@ data class Appointment(
     var appointmentDate: LocalDateTime,
     var doctorId: UUID,
     var type: AppointmentType,
+    var additionalInfo: String?,
 )
