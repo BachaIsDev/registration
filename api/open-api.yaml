@@ -11,13 +11,13 @@ paths:
     post:
       tags:
         - Appointment
-      operationId: createAppontment
+      operationId: createAppointment
       description: Создание записи
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "./components.yaml#/components/schemas/Appointment"
+              $ref: "./components.yaml#/components/schemas/AppointmentDto"
       responses:
         202:
           description: Запись создана
@@ -26,4 +26,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "ErrorResponse"
+                $ref: "./components.yaml#/components/schemas/ErrorResponse"

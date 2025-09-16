@@ -6,7 +6,7 @@ components:
         - TEST
         - DISEASE
         - INSPECTION
-    Appointment:
+    AppointmentDto:
       type: object
       properties:
         appointmentDate:
@@ -24,3 +24,13 @@ components:
         additionalInfo:
           type: string
           description: Дополнительная информация от клиента
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: false
+          description: Код ошибки
+        message:
+          type: string
+          description: Сообщение об ошибке
