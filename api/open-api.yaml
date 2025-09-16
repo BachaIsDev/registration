@@ -14,6 +14,7 @@ paths:
       operationId: createAppointment
       description: Создание записи
       requestBody:
+        required: true
         content:
           application/json:
             schema:

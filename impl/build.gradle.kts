@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    kotlin("kapt")
     kotlin("plugin.jpa")
     kotlin("plugin.spring")
     id("org.springframework.boot")
@@ -15,6 +16,8 @@ repositories {
     mavenLocal()
 }
 
+java.sourceCompatibility = org.gradle.api.JavaVersion.VERSION_21
+
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
@@ -25,8 +28,11 @@ val springBootStarterVersion: String by project
 val junitVersion: String by project
 val flywayGPVersion: String by project
 val lombokVersion: String by project
+val mapstructVersion: String by project
 
 dependencies {
+    kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+
     implementation(project(":api"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootStarterVersion")
@@ -36,6 +42,7 @@ dependencies {
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-gradle-plugin:$flywayGPVersion")
