@@ -8,10 +8,17 @@ plugins {
 
 group = "ru.bacha.registration"
 val revision: String by project
-version = "0.0.1-SNAPSHOT"
+version = revision
 
 repositories {
     mavenCentral()
+    mavenLocal()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
 }
 
 val springBootStarterVersion: String by project
@@ -30,8 +37,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.kafka:spring-kafka")
 
-    compileOnly("org.projectlombok:lombok:$lombokVersion")
-
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-gradle-plugin:$flywayGPVersion")
 
@@ -44,9 +49,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
-sourceSets.main {
-    java.srcDirs("src/main/kotlin/ru/bacha/registration")
-}
 
 tasks.withType<Test> {
     useJUnitPlatform()
