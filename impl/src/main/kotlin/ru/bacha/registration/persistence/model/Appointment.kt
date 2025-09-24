@@ -1,6 +1,8 @@
 package ru.bacha.registration.persistence.model
 
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.time.LocalDateTime
@@ -15,6 +17,7 @@ data class Appointment(
     val id: UUID,
     var appointmentDate: LocalDateTime,
     var doctorId: UUID,
-    var type: AppointmentType,
+    @Enumerated(EnumType.STRING)
+    var appointmentType: AppointmentType,
     var additionalInfo: String?,
 )
