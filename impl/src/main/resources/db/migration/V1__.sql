@@ -1,8 +1,8 @@
-CREATE TABLE appointment
+CREATE TABLE users
 (
-    id               UUID NOT NULL,
-    appointment_date TIMESTAMP WITHOUT TIME ZONE,
-    doctor_id        UUID,
-    appointment_type VARCHAR(20),
-    CONSTRAINT pk_appointment PRIMARY KEY (id)
+    uuid     UUID         NOT NULL,
+    email    VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_users PRIMARY KEY (uuid),
+    CONSTRAINT uq_users_email UNIQUE (email)
 );

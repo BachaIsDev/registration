@@ -7,18 +7,18 @@ servers:
   - url: http://localhost:8080
 
 paths:
-  /api/v1/appointment:
+  /api/v1/users:
     post:
       tags:
-        - Appointment
-      operationId: createAppointment
-      description: Создание записи
+        - User
+      operationId: signUp
+      description: Создание пользователя
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "./components.yaml#/components/schemas/AppointmentDto"
+              $ref: "./components.yaml#/components/schemas/UserDto"
       responses:
         202:
           description: Запись создана

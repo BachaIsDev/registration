@@ -1,29 +1,57 @@
 components:
   schemas:
-    AppointmentTypeDto:
-      type: string
-      enum:
-        - TEST
-        - DISEASE
-        - INSPECTION
-    AppointmentDto:
+    UserDto:
       type: object
       properties:
-        appointmentDate:
+        firstName:
           type: string
-          format: date-time
           nullable: false
-          description: Дата записи
-        doctorId:
+          description: Имя
+        lastName:
           type: string
-          format: uuid
           nullable: false
-          description: Идентификатор доктора
-        appointmentType:
-          $ref: "#/components/schemas/AppointmentTypeDto"
-        additionalInfo:
+          description: Фамилия
+        email:
           type: string
-          description: Дополнительная информация от клиента
+          nullable: false
+          description: Почтовый адрес
+        password:
+          type: string
+          nullable: false
+          description: Пароль
+
+    UserCredentialsDto:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: false
+          description: Почтовый адрес
+        password:
+          type: string
+          nullable: false
+          description: Пароль
+
+    RefreshTokenDto:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          nullable: false
+          description: Токен обновления
+
+    JwtAuthenticationDto:
+      type: object
+      properties:
+        token:
+          type: string
+          nullable: false
+          description: JWT токен
+        refreshToken:
+          type: string
+          nullable: false
+          description: Токен обновления
+
     ErrorResponse:
       type: object
       properties:

@@ -25,6 +25,9 @@ configurations {
 }
 
 val springBootStarterVersion: String by project
+val jsonWebTokenVersion: String by project
+val log4jVersion: String by project
+val slf4jVersion: String by project
 val junitVersion: String by project
 val flywayGPVersion: String by project
 val lombokVersion: String by project
@@ -34,18 +37,23 @@ dependencies {
     kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
 
     implementation(project(":api"))
-
+    implementation("org.springframework.boot:spring-boot-starter-security:$springBootStarterVersion")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootStarterVersion")
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootStarterVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation(platform("io.jsonwebtoken:jjwt-bom:$jsonWebTokenVersion"))
+    implementation("io.jsonwebtoken:jjwt-api")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
+    implementation("org.apache.logging.log4j:log4j-core:$log4jVersion")
+    implementation("com.github.f4b6a3:uuid-creator:6.1.1")
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-gradle-plugin:$flywayGPVersion")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson")
 
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 

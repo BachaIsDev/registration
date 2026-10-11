@@ -1,3 +1,28 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: registration
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:45432/vet_registration
+    username: vet_user
+    password: vet_password
+
+  flyway:
+    url: jdbc:postgresql://localhost:45432/vet_registration
+    user: vet_user
+    password: vet_password
+
+app:
+  secret: "8074658237c236e39e96e909ac1abb25a3e1773b100096ad6877c439cd452c17"

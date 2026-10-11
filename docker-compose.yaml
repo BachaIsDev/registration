@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: vet-registration-postgres
+    environment:
+      POSTGRES_DB: vet_registration
+      POSTGRES_USER: vet_user
+      POSTGRES_PASSWORD: vet_password
+    ports:
+      - "45432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+
+
